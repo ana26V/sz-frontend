@@ -6,11 +6,10 @@ import Swal from 'sweetalert2';
 import Footer from '../components/Footer'
 import { calculateAmountAP, calculateDaysBetweenDates } from '../utils/utils';
 import { getApartmentByID } from '../services/apartments';
-import { axiosInstance } from '../services/rooms';
 const ApBookings = () => {
     const [totalAmount,setTotalAmount]=useState(1);
     const { apartmentId, fromDate, toDate } = useParams();
-    const { error, loading, data: apartment = [] } = useFetchData(() => getApartmentByID(apartmentId), [apartmentId]);
+    const { data: apartment = [] } = useFetchData(() => getApartmentByID(apartmentId), [apartmentId]);
     const [numberOfPeople, setNumberOfPeople] = useState(1); // State to store the number of people for booking
     const currentUser=JSON.parse(localStorage.getItem('currentUser'));
     //const { data: inventoryByID = [] } = useFetchData(() => getInventoryByID(apartment.roomID?.inventoryID), [apartment]);
@@ -44,19 +43,8 @@ const ApBookings = () => {
     // }, [inventoryID]);
 
     async function onToken(token) {
-        const bookingDetails = {
-            apartment,
-            // user: JSON.parse(localStorage.getItem('currentUser'))
-            userID: currentUser._id,
-            fromDate,
-            toDate,
-            totalAmount,
-            totalDays,
-            token
-        }
         try {
-            const result = await axiosInstance.post('/api/bookingsAP/bookApartment', bookingDetails)
-            Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(result => {
+            Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(() => {
                 window.location.href = '/profile'
             })
         } catch (error) {
