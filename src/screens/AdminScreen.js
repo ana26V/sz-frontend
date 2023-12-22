@@ -5,7 +5,7 @@ import { useFetchData } from "../hooks/useData";
 import { getAllApartmentBookings, getAllBookings } from "../services/bookings";
 import { Table } from "react-bootstrap";
 import { getallrooms } from "../services/rooms";
-import { getAllUsers, getUserByID } from "../services/auth";
+import { getAllUsers } from "../services/auth";
 import { calculateTotalAmountPerMonth, calculateTotalCostPerMonth, getBookingsForMonth, getMonthNumberByName, months } from "../utils/utils";
 import { getAllApartments } from "../services/apartments";
 
@@ -495,23 +495,23 @@ function UsersTable() {
 }
 
 
-const AddRoomForm = () => {
-  //const [roomNumber, setRoomNumber] = useState(0);
+// const AddRoomForm = () => {
+//   //const [roomNumber, setRoomNumber] = useState(0);
 
-  return (
+//   return (
 
-    <>
-      <div className="input-group mb-3">
-        <input type="text" className="form-control" placeholder="Room number" aria-label="Room number" aria-describedby="basic-addon2" />
+//     <>
+//       <div className="input-group mb-3">
+//         <input type="text" className="form-control" placeholder="Room number" aria-label="Room number" aria-describedby="basic-addon2" />
 
-      </div>
-      <Button variant="primary">
-        Add Room
-      </Button>
+//       </div>
+//       <Button variant="primary">
+//         Add Room
+//       </Button>
 
-    </>
-  );
-};
+//     </>
+//   );
+// };
 const Finance = () => {
   const { loading, error, data: bookings = [] } = useFetchData(() => getAllBookings());
 

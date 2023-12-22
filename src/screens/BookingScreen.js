@@ -53,7 +53,6 @@ useEffect(() => {
             token
         }
         try {
-            const result = await axiosInstance.post('/api/bookings/bookroom', bookingDetails)
             Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(result => {
                 window.location.href = '/profile'
             })

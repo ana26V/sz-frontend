@@ -16,7 +16,7 @@ function HomeScreen() {
   const [copyRooms, setCopyRooms] = useState([]);
   const [searchKey, setSearchKey] = useState('');
 
-  const { error, loading, data: rooms = [] } = useFetchData(() => getallrooms());
+  const { data: rooms = [] } = useFetchData(() => getallrooms());
   useEffect(() => {
     setCopyRooms(rooms);
   }, [rooms]);

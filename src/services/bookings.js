@@ -21,7 +21,6 @@ export async function cancelBooking(bookingID, roomID) {
 
     try {
 
-        const result = await (await axiosInstance.post("/api/bookings/cancelbooking", { bookingID, roomID })).data
 
         Swal.fire('Congrats', 'Your  bookings has been cancelled', 'success').then(result => {
             window.location.reload()
@@ -37,7 +36,6 @@ export async function cancelBookingApartment(bookingID, apartmentID) {
 
     try {
 
-        const result = await (await axiosInstance.post("/api/bookingsAP/cancelbooking", { bookingID, apartmentID })).data
 
         Swal.fire('Congrats', 'Your  bookings has been cancelled', 'success').then(result => {
             window.location.reload()

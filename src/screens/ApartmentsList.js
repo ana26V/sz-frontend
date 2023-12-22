@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Room from '../components/Room';
 import { useFetchData } from '../hooks/useData';
-import { getallrooms } from '../services/rooms';
 import { DatePicker, Input, Select } from 'antd';
 import { formatDateToDDMMYYYY } from '../utils/utils';
 import BoxWrapper from '../components/BoxWrapper';
@@ -18,7 +16,7 @@ function ApartmentList() {
   const [copyApartments, setCopyApartments] = useState([]);
   const [searchKey, setSearchKey] = useState('');
 
-  const { error, loading, data: apartments = [] } = useFetchData(() => getAllApartments());
+  const { data: apartments = [] } = useFetchData(() => getAllApartments());
 //   useEffect(() => {
 //     setCopyRooms(apartments);
 //   }, [apartments]);
