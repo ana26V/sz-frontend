@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import Footer from '../components/Footer'
 import { calculateAmountAP, calculateDaysBetweenDates } from '../utils/utils';
 import { getApartmentByID } from '../services/apartments';
+import { axiosInstance } from '../services/rooms';
 const ApBookings = () => {
     const [totalAmount,setTotalAmount]=useState(1);
     const { apartmentId, fromDate, toDate } = useParams();
@@ -43,8 +44,20 @@ const ApBookings = () => {
     // }, [inventoryID]);
 
     async function onToken(token) {
+        const bookingDetails = {
+            apartment,
+            // user: JSON.parse(localStorage.getItem('currentUser'))
+            userID: currentUser._id,
+            fromDate,
+            toDate,
+            totalAmount,
+            totalDays,
+            token
+        }
         try {
-            Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(() => {
+            // eslint-disable-next-line no-unused-vars
+            const result = await axiosInstance.post('/api/bookingsAP/bookApartment', bookingDetails)
+            Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(result => {
                 window.location.href = '/profile'
             })
         } catch (error) {
