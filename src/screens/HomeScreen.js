@@ -92,7 +92,7 @@ function HomeScreen() {
 
 
         <div className='row justify-content-center mt-5'>
-          {copyRooms.map((r) => (
+          {copyRooms.slice(0,4).map((r) => (
             <div key={r._id} className='col-md-9 mt-2'>
               <Room room={r} fromDate={fromDate} toDate={toDate} />
             </div>
