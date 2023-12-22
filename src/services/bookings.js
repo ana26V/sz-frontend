@@ -1,27 +1,27 @@
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import { axiosInstance } from './rooms';
 // export const getBookingsByUserId = (id) => {
 //     return axios.get(`/api/bookings/${id}`);
 // };
 
 
 export const getAllBookings = () => {
-    return axios.get(`/api/bookings/getallbookings`);
+    return axiosInstance.get(`/api/bookings/getallbookings`);
 };
 export const getAllApartmentBookings = () => {
-    return axios.get(`/api/bookingsAP/getAllApartmentBookings`);
+    return axiosInstance.get(`/api/bookingsAP/getAllApartmentBookings`);
 };
 export const getBookingsByUserId = (id) => {
-    return axios.post(`/api/bookings/getbookingsbyuserid`, { userID: id });
+    return axiosInstance.post(`/api/bookings/getbookingsbyuserid`, { userID: id });
 };
 export const getApartmentBookingsByUserId = (id) => {
-    return axios.post(`/api/bookingsAP/getbookingsbyuserid`, { userID: id });
+    return axiosInstance.post(`/api/bookingsAP/getbookingsbyuserid`, { userID: id });
 };
 export async function cancelBooking(bookingID, roomID) {
 
     try {
 
-        const result = await (await axios.post("/api/bookings/cancelbooking", { bookingID, roomID })).data
+        const result = await (await axiosInstance.post("/api/bookings/cancelbooking", { bookingID, roomID })).data
 
         Swal.fire('Congrats', 'Your  bookings has been cancelled', 'success').then(result => {
             window.location.reload()
@@ -37,7 +37,7 @@ export async function cancelBookingApartment(bookingID, apartmentID) {
 
     try {
 
-        const result = await (await axios.post("/api/bookingsAP/cancelbooking", { bookingID, apartmentID })).data
+        const result = await (await axiosInstance.post("/api/bookingsAP/cancelbooking", { bookingID, apartmentID })).data
 
         Swal.fire('Congrats', 'Your  bookings has been cancelled', 'success').then(result => {
             window.location.reload()

@@ -1,14 +1,19 @@
 import axios from 'axios';
+
+export const axiosInstance = axios.create({
+    baseURL: "https://hotel-szz.onrender.com",
+
+})
 export function getallrooms() {
-    return axios.get('/api/rooms/getallrooms')
+    return axiosInstance.get('/api/rooms/getallrooms')
 }
 export const getRoomByID = (id) => {
-    return axios.get(`/api/rooms/${id}`);
+    return axiosInstance.get(`/api/rooms/${id}`);
 };
 
 export const getInventoryByID = (id) => {
-    return axios.post('/api/rooms/getInventoryById', { inventoryID: id });
+    return axiosInstance.post('/api/rooms/getInventoryById', { inventoryID: id });
 };
 export const getFacilitiesById = (id) => {
-    return axios.post('/api/rooms/getFacilitiesById', { facilitiesID: id });
+    return axiosInstance.post('/api/rooms/getFacilitiesById', { facilitiesID: id });
 };

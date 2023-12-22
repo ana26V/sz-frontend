@@ -1,7 +1,7 @@
-import axios from 'axios';
+import { axiosInstance } from './rooms';
 export function getAllApartments() {
-    return axios.get('/api/apartments/getAllApartments')
+    return axiosInstance.get('/api/apartments/getAllApartments')
 }
 export function getApartmentByID(id) {
-    return axios.get(`/api/apartments/${id}`)
+    return axiosInstance.get(`/api/apartments/${id}`)
 }

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetchData } from '../hooks/useData';
 import StripeCheckout from 'react-stripe-checkout';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import Footer from '../components/Footer'
 import { calculateAmountAP, calculateDaysBetweenDates } from '../utils/utils';
 import { getApartmentByID } from '../services/apartments';
+import { axiosInstance } from '../services/rooms';
 const ApBookings = () => {
     const [totalAmount,setTotalAmount]=useState(1);
     const { apartmentId, fromDate, toDate } = useParams();
@@ -55,7 +55,7 @@ const ApBookings = () => {
             token
         }
         try {
-            const result = await axios.post('/api/bookingsAP/bookApartment', bookingDetails)
+            const result = await axiosInstance.post('/api/bookingsAP/bookApartment', bookingDetails)
             Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(result => {
                 window.location.href = '/profile'
             })

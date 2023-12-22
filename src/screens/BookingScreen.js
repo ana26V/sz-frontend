@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetchData } from '../hooks/useData';
 import StripeCheckout from 'react-stripe-checkout';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import Footer from '../components/Footer'
-import { getFacilitiesById, getInventoryByID, getRoomByID } from '../services/rooms';
+import { axiosInstance, getFacilitiesById, getInventoryByID, getRoomByID } from '../services/rooms';
 import { calculateAmount, calculateDaysBetweenDates } from '../utils/utils';
 const BookingScreen = () => {
     const { roomid, fromDate, toDate } = useParams();
@@ -54,7 +53,7 @@ useEffect(() => {
             token
         }
         try {
-            const result = await axios.post('/api/bookings/bookroom', bookingDetails)
+            const result = await axiosInstance.post('/api/bookings/bookroom', bookingDetails)
             Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(result => {
                 window.location.href = '/profile'
             })

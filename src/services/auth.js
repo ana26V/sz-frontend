@@ -1,13 +1,13 @@
-import axios from 'axios';
+import { axiosInstance } from './rooms';
 export function getAllUsers() {
-    return axios.get('/api/users/getAllUsers')
+    return axiosInstance.get('/api/users/getAllUsers')
 }
 export function getUserByID(id) {
-    return axios.get(`/api/users/${id}`)
+    return axiosInstance.get(`/api/users/${id}`)
 }
 export function register(user) {
-    return axios.post('/api/users/register',user)
+    return axiosInstance.post('/api/users/register',user)
 }
 export function login(user) {
-    return axios.post('/api/users/login',user)
+    return axiosInstance.post('/api/users/login',user)
 }
