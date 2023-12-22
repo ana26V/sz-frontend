@@ -21,9 +21,18 @@ const RoomCard = ({ room }) => {
 
 function Apartment({ apartment, fromDate, toDate }) {
 
-    console.log(apartment.current_bookings)
+  let user = null;
+  try {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      user = JSON.parse(currentUser);
+    }
+  } catch (error) {
+    console.error('Error parsing user data:', error);
+    // Handle the parsing error, such as clearing the localStorage or displaying an error message.
+  }
 
-
+  const isUserLoggedIn = !!user; 
   //const roomAvailable = !isRoomTaken(); // Check if the room is available
   const roomAvailable =true;
   return (
@@ -42,18 +51,24 @@ function Apartment({ apartment, fromDate, toDate }) {
       
     {(isValidDateFormat(fromDate) && isValidDateFormat(toDate)) ? (
                //COME BACK HERE AND CHANGE
+               isUserLoggedIn ? ( // Check if the user is logged in
                roomAvailable ? (
-                  <Link to={`/bookAP/${apartment._id}/${fromDate}/${toDate}`}>
-                    <button className='btn btn-primary'>Book now</button>
-                  </Link>
-                ) : (
-                  <button className='btn btn-primary' disabled>Room taken</button>
-                )
-              ) : (
-                <Link to={`/`}>
-                  <button className='btn btn-danger' disabled>Select date first!</button>
-                </Link>
-              )}
+                 <Link to={`/book/${apartment._id}/${fromDate}/${toDate}`}>
+                   <button className='btn btn-primary'>Book now</button>
+                 </Link>
+               ) : (
+                 <button className='btn btn-primary' disabled>Apartment taken</button>
+               )
+             ) : (
+               <Link to={`/login`}> {/* Redirect to login if not logged in */}
+                 <button className='btn btn-primary'>Login to book</button>
+               </Link>
+             )
+           ) : (
+             <Link to={`/`}>
+               <button className='btn btn-danger' disabled>Select date first!</button>
+             </Link>
+           )}
     </Card.Footer>
   </Card>
   );
