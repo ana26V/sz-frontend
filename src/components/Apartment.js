@@ -21,8 +21,17 @@ const RoomCard = ({ room }) => {
 
 function Apartment({ apartment, fromDate, toDate }) {
 
-    console.log(apartment.current_bookings)
-
+  let user = null;
+  try {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      user = JSON.parse(currentUser);
+    }
+  } catch (error) {
+    console.error('Error parsing user data:', error);
+    // Handle the parsing error, such as clearing the localStorage or displaying an error message.
+  }
+  const isUserLoggedIn = !!user; 
   // eslint-disable-next-line no-unused-vars
   const isRoomTaken = () => {
     //CHANGE HERRE
@@ -69,12 +78,18 @@ function Apartment({ apartment, fromDate, toDate }) {
       
     {(isValidDateFormat(fromDate) && isValidDateFormat(toDate)) ? (
                //COME BACK HERE AND CHANGE
+               isUserLoggedIn ? (
                roomAvailable ? (
                   <Link to={`/bookAP/${apartment._id}/${fromDate}/${toDate}`}>
                     <button className='btn btn-primary'>Book now</button>
                   </Link>
                 ) : (
                   <button className='btn btn-primary' disabled>Room taken</button>
+                )
+                ) : (
+                  <Link to={`/login`}> {/* Redirect to login if not logged in */}
+                    <button className='btn btn-primary'>Login to book</button>
+                  </Link>
                 )
               ) : (
                 <Link to={`/`}>
