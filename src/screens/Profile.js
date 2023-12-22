@@ -20,6 +20,13 @@ function Profile() {
 
                 </Card.Text>
                 <Card.Text>
+                    <b>  CNP: </b> {user.CNP} 
+                </Card.Text>
+                <Card.Text>
+                    <b>  Address: </b> {user.address} 
+                </Card.Text>
+
+                <Card.Text>
                     <b> Email:</b> {user.email}
 
                 </Card.Text>

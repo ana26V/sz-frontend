@@ -8,7 +8,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 const RoomCard = ({ room }) => {
   return (
     <Card className="text-center mb-3 mx-3">
-      <Card.Img variant="top" src={room.image_urls} />
+      <Card.Img variant="top" height={200} width={200} src={room.image_urls[0]} />
       <Card.Body>
         <Card.Title>Room: {room.room_number}</Card.Title>
         <Card.Text>
