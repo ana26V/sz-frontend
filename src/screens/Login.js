@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { login } from '../services/auth';
-import axios from 'axios'
+import { axiosInstance } from '../services/rooms';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +16,7 @@ const Login = () => {
   const handleLogin = async () => {
     const user = { email, password };
     login(user);
-    const res = (await axios.post('/api/users/login', user)).data
+    const res = (await axiosInstance.post('/api/users/login', user)).data
     localStorage.setItem('currentUser', JSON.stringify(res));
     window.location.href = '/';
   };
