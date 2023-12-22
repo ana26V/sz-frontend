@@ -4,7 +4,7 @@ import { useFetchData } from '../hooks/useData';
 import StripeCheckout from 'react-stripe-checkout';
 import Swal from 'sweetalert2';
 import Footer from '../components/Footer'
-import { axiosInstance, getFacilitiesById, getInventoryByID, getRoomByID } from '../services/rooms';
+import {  getFacilitiesById, getInventoryByID, getRoomByID } from '../services/rooms';
 import { calculateAmount, calculateDaysBetweenDates } from '../utils/utils';
 const BookingScreen = () => {
     const { roomid, fromDate, toDate } = useParams();
@@ -42,16 +42,6 @@ useEffect(() => {
     }
 
     async function onToken(token) {
-        const bookingDetails = {
-            room,
-            
-            userID: currentUser._id,
-            fromDate,
-            toDate,
-            totalAmount,
-            totalDays,
-            token
-        }
         try {
             Swal.fire('Congratulations', 'Room Booked Successfully', 'success').then(result => {
                 window.location.href = '/profile'
